@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang ="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function() {
  </script>       
 <body>
  <div> 
-<form action ="training" method="get">
+<form action ="/login" method="post">
  <h1>Login</h1>
 
  <input type="email"name="email"placeholder="Enter the Email"><br><br>

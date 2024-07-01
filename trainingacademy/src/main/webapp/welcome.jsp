@@ -196,7 +196,7 @@
 
     <div class="center-content">
         <h1>Learn without Limits...</h1>
-        <img src="image/homebackground.jpg" alt="Background Image">
+        <img src="image/homebackground.jpg" alt="Background ">
     </div>
     <div class="content">
         <p>Professional Certificates offer flexible, online training designed <br><br>

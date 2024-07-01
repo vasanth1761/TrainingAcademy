@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
@@ -69,9 +69,9 @@ document.addEventListener("DOMContentLoaded", function() {
  </script>   
 <body>
 <div>
-<form id="registerForm" action="training" method="get">
+<form id="registerForm" action="/register" method="post">
  <h1>REGISTER</h1>
- <input type="text" name="name" placeholder="Enter the name" pattern="[A-Za-z]{5,}" required><br><br>
+ <input type="text" name="name" placeholder="Enter the name"  required><br><br>
  <input type="email" name="email" placeholder="Enter the Email"><br><br>
  <input type="text" name="number" placeholder="Mobile" pattern="[0-9]{10}"required><br><br>
  <input type="password" name="password" placeholder="Password"pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#&]).{5,}"required><br><br>

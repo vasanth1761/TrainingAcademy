@@ -17,6 +17,9 @@ public class Users {
 		this.phone = phone;
 		this.password = password;
 	}
+	public Users() {
+		
+	}
 	public void setId(int id) {
 		this.id = id;
 	}

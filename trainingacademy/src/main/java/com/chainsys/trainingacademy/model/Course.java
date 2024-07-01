@@ -1,23 +1,23 @@
 package com.chainsys.trainingacademy.model;
 
 public class Course {
-	int courseid;
-	 String CourseName;
+	 int courseId;
+	 String courseName;
 	 String paymentType;
-	 String AccoutNumber;
+	 String accoutNumber;
 	 String date;
 	 int amount;
 	public int getCourseid() {
-		return courseid;
+		return courseId;
 	}
 	public void setCourseid(int courseid) {
-		this.courseid = courseid;
+		this.courseId = courseid;
 	}
 	public String getCourseName() {
-		return CourseName;
+		return courseName;
 	}
 	public void setCourseName(String courseName) {
-		CourseName = courseName;
+		courseName = courseName;
 	}
 	public String getPaymentType() {
 		return paymentType;
@@ -26,10 +26,10 @@ public class Course {
 		this.paymentType = paymentType;
 	}
 	public String getAccoutNumber() {
-		return AccoutNumber;
+		return accoutNumber;
 	}
 	public void setAccoutNumber(String accoutNumber) {
-		AccoutNumber = accoutNumber;
+		accoutNumber = accoutNumber;
 	}
 	public String getDate() {
 		return date;
@@ -43,12 +43,12 @@ public class Course {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-	public Course(int courseid, String courseName, String paymentType, String accoutNumber, String date, int amount) {
+	public Course(int courseId, String courseName, String paymentType, String accoutNumber, String date, int amount) {
 		super();
-		this.courseid = courseid;
-		CourseName = courseName;
+		this.courseId = courseId;
+		courseName = courseName;
 		this.paymentType = paymentType;
-		AccoutNumber = accoutNumber;
+		accoutNumber = accoutNumber;
 		this.date = date;
 		this.amount = amount;
 	}
