@@ -29,7 +29,7 @@ public  String user(@RequestParam("name") String name,@RequestParam("email") Str
    Users insertDetails= new Users();	
    insertDetails.setName(name);
    insertDetails.setEmail(email);
-   insertDetails.setPhone(password);
+   insertDetails.setPhone(number);
    insertDetails.setPassword(password);
    if(userdao.insertRegister(insertDetails))
    {
@@ -44,18 +44,25 @@ public  String user(@RequestParam("name") String name,@RequestParam("email") Str
 }
 
 @PostMapping("/login")
-public String userLogin(@RequestParam("email") String name,@RequestParam("password") String password,HttpSession session,Model model)
+public String userLogin(@RequestParam("email") String email,@RequestParam("password") String password,HttpSession session,Model model)
 {  
     Users insertLoginDetails=new Users();
-    insertLoginDetails.setEmail(name);
+    insertLoginDetails.setEmail(email);
     insertLoginDetails.setPassword(password);
     if(userdao.insertLogin(insertLoginDetails))
     {
-     Users id=userdao.getId(insertLoginDetails);	
-    System.out.println(id.getId());
-    System.out.println(id.getName());
+    Users id=userdao.getId(insertLoginDetails);	
     session.setAttribute("id", id);
-	return "course.jsp";
+    if(email.endsWith("@systech.com")&& password.endsWith("Vasanth@1761"))
+	{
+   
+		return"redirect:/admin.jsp";
+	}
+	else
+	{
+		return "course.jsp";
+	}
+	
     }
     else
     {

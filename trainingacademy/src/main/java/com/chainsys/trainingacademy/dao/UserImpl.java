@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.chainsys.trainingacademy.model.Questions;
 import com.chainsys.trainingacademy.model.Users;
 import com.chainsys.trainingacademy.mapper.*;
 @Repository
@@ -14,7 +15,7 @@ public class UserImpl implements UserDAO {
 	 JdbcTemplate jdbcTemplate;
 	@Override
 	public boolean insertRegister(Users insertDetails) {
-   // TODO document why this method is empty
+
 	String register="SELECT count(*)FROM users WHERE user_mailid=?";
 	Object[]email= {insertDetails.getEmail()};
 	int count= jdbcTemplate.queryForObject(register,Integer.class,email);
@@ -30,25 +31,35 @@ public class UserImpl implements UserDAO {
 }
 	@Override
 	public boolean insertLogin(Users insertLoginDetails) {
-		// TODO Auto-generated method stub
+
 		String register="SELECT count(*)FROM users WHERE user_mailid=?&&user_password=?";
 		Object[]email= {insertLoginDetails.getEmail(),insertLoginDetails.getPassword()};
 		int count= jdbcTemplate.queryForObject(register,Integer.class,email);
 		if(count==0)
 		{
 		
-		return true;
+		return false;
 	    }
 	
-		return false;
+		return true;
 	}
 	@Override
 	public Users getId(Users insertLoginDetails) {
-		// TODO Auto-generated method stub
+
 		String id="SELECT user_id,user_name FROM users WHERE user_mailid=?";
 		Object[]email= {insertLoginDetails.getEmail()};
 		Users courseId=jdbcTemplate.queryForObject(id,new Mapper(),email);
 		return courseId ;
+	}
+	@Override
+	public void addQuestion(Questions viewQuestions) {
+       
+		String query="insert into question (questions,option_1,option_2,option_3,option_4,correct_answer,category)values(?,?,?,?,?,?,?)";
+		Object[]questionContent= {viewQuestions.getQuestion(),viewQuestions.getOptionA(),viewQuestions.getOptionA(),
+				viewQuestions.getOptionC(),viewQuestions.getOptionD(),viewQuestions.getCorrectAnswer(),viewQuestions.getCourse()};
+		jdbcTemplate.update(query,questionContent);	
+		
+		
 	}
 	
 }

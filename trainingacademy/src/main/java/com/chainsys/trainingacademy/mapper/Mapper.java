@@ -11,7 +11,7 @@ public class Mapper implements RowMapper<Users>{
 
 	@Override
 	public Users mapRow(ResultSet rs, int rowNum) throws SQLException {
-		// TODO Auto-generated method stub
+
        Users user=new Users();
 		
 	   user.setId(rs.getInt("user_id"));
