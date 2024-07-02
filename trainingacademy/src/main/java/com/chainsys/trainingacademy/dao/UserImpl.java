@@ -1,4 +1,5 @@
 package com.chainsys.trainingacademy.dao;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +62,12 @@ public class UserImpl implements UserDAO {
 		
 		
 	}
+	public List<Questions>get(String category)throws ClassNotFoundException, SQLException{
+		String query="select id,questions,option_1,option_2,option_3,option_4,correct_answer,category from question where category=?";
+		Object[]course= {category};
+		List<Questions>user=jdbcTemplate.query(query,new ViewQuestionMapper(),course);
+		return user;
+		
 	
+}
 }

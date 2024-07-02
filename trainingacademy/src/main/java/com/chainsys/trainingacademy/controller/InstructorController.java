@@ -1,7 +1,11 @@
 package com.chainsys.trainingacademy.controller;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +18,8 @@ public class InstructorController {
 	UserDAO userdao;
 	@PostMapping("/add")	
 	public String instructor(@RequestParam("course")String course,@RequestParam("question")String question,@RequestParam("option1")String option1,
-			@RequestParam("option2")String option2,@RequestParam("option3")String option3,@RequestParam("option4")String option4,@RequestParam("correctAnswer")String correctAnswer)
+			@RequestParam("option2")String option2,@RequestParam("option3")String option3,@RequestParam("option4")String option4,@RequestParam("correctAnswer")String correctAnswer,
+			Model model)
 	{ 
 		Questions viewQuestion=new Questions();
 	    viewQuestion.setCourse(course);
@@ -24,8 +29,16 @@ public class InstructorController {
 	    viewQuestion.setOptionC(option3);
 	    viewQuestion.setOptionD(option4);
 	    viewQuestion.setCorrectAnswer(correctAnswer);
+	    String category=viewQuestion.getCourse();
 	    userdao.addQuestion(viewQuestion);
-		return "admin.jsp";
+	    try {
+			List<Questions>viewQuestions= userdao.get(category);
+			model.addAttribute("view", viewQuestions);
+		} catch (ClassNotFoundException | SQLException e) {
+		
+			e.printStackTrace();
+		}
+		return "viewQuestion.jsp";
 		
 	}
 
