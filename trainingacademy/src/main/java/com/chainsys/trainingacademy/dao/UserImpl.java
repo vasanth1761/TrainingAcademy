@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.chainsys.trainingacademy.model.Questions;
+import com.chainsys.trainingacademy.model.Result;
 import com.chainsys.trainingacademy.model.Users;
+import com.chainsys.trainingacademy.model.Videos;
 import com.chainsys.trainingacademy.mapper.*;
 @Repository
 public class UserImpl implements UserDAO {
@@ -41,8 +42,9 @@ public class UserImpl implements UserDAO {
 		
 		return false;
 	    }
-	
+			
 		return true;
+		
 	}
 	@Override
 	public Users getId(Users insertLoginDetails) {
@@ -62,7 +64,7 @@ public class UserImpl implements UserDAO {
 		
 		
 	}
-	public List<Questions>get(String category)throws ClassNotFoundException, SQLException{
+	public List<Questions>getQuestion(String category)throws ClassNotFoundException, SQLException{
 		String query="select id,questions,option_1,option_2,option_3,option_4,correct_answer,category from question where category=?";
 		Object[]course= {category};
 		List<Questions>user=jdbcTemplate.query(query,new ViewQuestionMapper(),course);
@@ -70,4 +72,39 @@ public class UserImpl implements UserDAO {
 		
 	
 }
+	@Override
+	public void addVideo(Videos insertvideo) {
+		String query="insert into videos(VideoTitle,VideoLink,Category)values(?,?,?)";
+		Object[]video= {insertvideo.getTitle(),insertvideo.getLink(),insertvideo.getCategory()};
+		jdbcTemplate.update(query,video);
+	}
+	
+	@Override
+	
+	public List<Videos> getVideo(String category)throws ClassNotFoundException, SQLException{
+		String query="select VideoID,VideoTitle,VideoLink,VideoLink,Category from videos where category=?";
+		Object[]course= {category};
+		List<Videos>user=jdbcTemplate.query(query,new ViewVideoMapper(),course);
+		return user;
+}
+	@Override
+	public List<Questions> getAllQuestions() throws ClassNotFoundException, SQLException {
+		String query="select id,questions,option_1,option_2,option_3,option_4,correct_answer,category from question";
+		List<Questions>user=jdbcTemplate.query(query,new ViewQuestionMapper());
+		return user;
+		
+	}
+	@Override
+	public List<Videos> getAllVideos() throws ClassNotFoundException, SQLException {
+		String query="select VideoID,VideoTitle,VideoLink,VideoLink,Category from videos";
+		List<Videos>user=jdbcTemplate.query(query,new ViewVideoMapper());
+		return user;
+		
+}
+	@Override
+	public List<Result> getAllComments() throws ClassNotFoundException, SQLException {
+		String query="select learner_id,learner_name,learner_course,learner_comments from learner_comments";
+		List<Result>comments=jdbcTemplate.query(query,new ViewCommentMapper());
+		return comments;
+	}
 }

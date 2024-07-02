@@ -54,7 +54,7 @@
 
 <body>
  <h1>Add Video</h1>
-    <form action="Video" method="post">
+    <form action="addVideo" method="post">
         <label for="title">Video Title:</label><br>
         <input type="text" id="title" name="title" required><br>
 

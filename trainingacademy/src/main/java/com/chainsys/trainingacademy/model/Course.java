@@ -17,7 +17,7 @@ public class Course {
 		return courseName;
 	}
 	public void setCourseName(String courseName) {
-		courseName = courseName;
+		this.courseName = courseName;
 	}
 	public String getPaymentType() {
 		return paymentType;
@@ -29,7 +29,7 @@ public class Course {
 		return accoutNumber;
 	}
 	public void setAccoutNumber(String accoutNumber) {
-		accoutNumber = accoutNumber;
+		this.accoutNumber = accoutNumber;
 	}
 	public String getDate() {
 		return date;
@@ -46,9 +46,9 @@ public class Course {
 	public Course(int courseId, String courseName, String paymentType, String accoutNumber, String date, int amount) {
 		super();
 		this.courseId = courseId;
-		courseName = courseName;
+		this.courseName = courseName;
 		this.paymentType = paymentType;
-		accoutNumber = accoutNumber;
+		this.accoutNumber = accoutNumber;
 		this.date = date;
 		this.amount = amount;
 	}

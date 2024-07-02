@@ -120,14 +120,14 @@
         <li><a href="home.html">Home</a></li>
         <li><a href="addQuestions.jsp">Add Question</a></li>
         <li><a href="addVideo.jsp">Add Video</a></li>
-        <li><a href="ViewVideos">View videos</a></li>
-        <li><a href="ViewQuestions">View questions</a></li>
+        <li><a href="viewVideos">View videos</a></li>
+        <li><a href="viewQuestions">View questions</a></li>
         
     </ul>
 </div>
 
 <div class="content">
-    <div class="card" onclick="location.href='Resultoutputadmin.jsp';">
+    <div class="card" onclick="location.href='viewResult.jsp';">
         <div class="card-title">
             Learners Result
         </div>
