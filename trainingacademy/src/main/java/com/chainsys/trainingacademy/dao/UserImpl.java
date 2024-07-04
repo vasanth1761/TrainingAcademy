@@ -6,25 +6,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.chainsys.trainingacademy.model.Comments;
 import com.chainsys.trainingacademy.model.Questions;
 import com.chainsys.trainingacademy.model.Result;
 import com.chainsys.trainingacademy.model.Users;
 import com.chainsys.trainingacademy.model.Videos;
 import com.chainsys.trainingacademy.mapper.*;
-@Repository
+@Repository("userDao")
 public class UserImpl implements UserDAO {
 	@Autowired
 	 JdbcTemplate jdbcTemplate;
 	@Override
-	public boolean insertRegister(Users insertDetails) {
+	public boolean insertRegister(Users insertUserDetails) {
 
 	String register="SELECT count(*)FROM users WHERE user_mailid=?";
-	Object[]email= {insertDetails.getEmail()};
+	Object[]email= {insertUserDetails.getEmail()};
 	int count= jdbcTemplate.queryForObject(register,Integer.class,email);
 	if(count==0)
 	{
 	String query="insert into users(user_name,user_mailid,user_phonenumber,user_password)values(?,?,?,?)";
-	Object[]table= {insertDetails.getName(),insertDetails.getEmail(),insertDetails.getPhone(),insertDetails.getPassword()};
+	Object[]table= {insertUserDetails.getName(),insertUserDetails.getEmail(),insertUserDetails.getPhone(),insertUserDetails.getPassword()};
     jdbcTemplate.update(query, table);
 	return true;
     }
@@ -64,6 +65,7 @@ public class UserImpl implements UserDAO {
 		
 		
 	}
+	@Override
 	public List<Questions>getQuestion(String category)throws ClassNotFoundException, SQLException{
 		String query="select id,questions,option_1,option_2,option_3,option_4,correct_answer,category from question where category=?";
 		Object[]course= {category};
@@ -101,10 +103,45 @@ public class UserImpl implements UserDAO {
 		return user;
 		
 }
+
 	@Override
-	public List<Result> getAllComments() throws ClassNotFoundException, SQLException {
-		String query="select learner_id,learner_name,learner_course,learner_comments from learner_comments";
-		List<Result>comments=jdbcTemplate.query(query,new ViewCommentMapper());
-		return comments;
+	public void deleteQuestions(int id) throws ClassNotFoundException, SQLException {
+		 String delete="DELETE FROM question WHERE id=?";
+		   Object[]questionId= {id};
+		   jdbcTemplate.update(delete,questionId);
+		   
+		
 	}
+   @Override
+	public void updateQuestion(Questions updateQuestions, int updateId) throws ClassNotFoundException, SQLException {
+		String query="update question set questions=?,option_1=?,option_2=?,option_3=?,option_4=?,correct_answer=? where id=?";
+		Object[]table= {updateQuestions.getQuestion(),updateQuestions.getOptionA(),updateQuestions.getOptionB(),updateQuestions.getOptionC(),updateQuestions.getOptionD(),updateQuestions.getCorrectAnswer(),updateId};
+		jdbcTemplate.update(query,table);
+	}
+   @Override
+   public void updateVideo(Videos updateVideos) throws ClassNotFoundException, SQLException {
+	String query="update videos set VideoTitle=?,VideoLink=? where VideoID=? ";
+	Object[]table= {updateVideos.getTitle(),updateVideos.getLink(),updateVideos.getId()};
+	jdbcTemplate.update(query,table);
+	
+}
+   @Override
+   public void deleteVideo(int deleteId) throws ClassNotFoundException, SQLException {
+   String query="DELETE FROM videos where  VideoID=? ";
+   jdbcTemplate.update(query,deleteId);
+	
+}
+   @Override
+    public List<Result> getAllResults() throws ClassNotFoundException, SQLException {
+	String query="select learner_id,learner_name,learner_course,learner_score,learner_percentage from learner_result";
+	List<Result>comments=jdbcTemplate.query(query,new ViewResultMapper());
+	return comments;
+}
+@Override
+public List<Comments> getAllComments() throws ClassNotFoundException, SQLException {
+	String query="select learner_id,learner_name,learner_course,learner_comments from learner_comments";
+	List<Comments>viewComments=jdbcTemplate.query(query,new ViewCommentMapper());
+	return viewComments;
+}
+	
 }

@@ -127,7 +127,7 @@
 </div>
 
 <div class="content">
-    <div class="card" onclick="location.href='viewResult.jsp';">
+    <div class="card" onclick="location.href='viewResult';">
         <div class="card-title">
             Learners Result
         </div>
@@ -135,7 +135,7 @@
     
         
     </div>
-    <div class="card" onclick="location.href='Comment.jsp';">
+    <div class="card" onclick="location.href='viewComments';">
         <div class="card-title">
             Reviews
         </div>

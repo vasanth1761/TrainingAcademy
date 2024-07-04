@@ -1,8 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ page import="com.chainsys.trainingacademy.model.Result" %>
-<%@ page import="com.chainsys.trainingacademy.dao.UserDAO" %>
-<%@ page import="com.chainsys.trainingacademy.dao.UserImpl" %>
+<%@ page import="com.chainsys.trainingacademy.model.Comments" %>
 <%@ page import="java.util.List" %>
 
 <!DOCTYPE html>
@@ -22,8 +18,8 @@
             margin-bottom: 20px;
         }
         table {
-            width: 70%; 
-            margin: 0 auto; 
+            width: 70%; /* Adjusted table width */
+            margin: 0 auto; /* Center align the table */
             border-collapse: collapse;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -53,26 +49,23 @@
                 <th>Learner ID</th>
                 <th>Learner Name</th>
                 <th>Course Name</th>
-                <th>Correct Answers</th>
-                <th>Percentage</th>
+                <th>Comments</th>
             </tr>
         </thead>
         <tbody>
-            <%-- Replace this part with your Java logic to fetch results from the backend --%>
+            
             <%
             
-             /* UserImpl user = new UserImpl();
-                           List<Result> resultOutput = user.getAllResults(); */
-                    List<Result> resultOutput = (List<Result>) request.getAttribute("viewResult");          
+            List<Comments> question = (List<Comments>) request.getAttribute("viewComments");
             %>
             
-            <% for (Result result : resultOutput) { %>
+            <% for(Comments result : question) { %>
                 <tr>
-                    <td><%= result.getId() %></td>
-                    <td><%= result.getName() %></td>
-                    <td><%= result.getCourse()%></td>
-                    <td><%= result.getScore() %></td>
-                    <td><%= result.getPercentage() %></td>
+                    <td><%= result.getLearnerId() %></td>
+                    <td><%= result.getLearnerName()%></td>
+                    <td><%= result.getLearnerCourse()%></td>
+                    <td><%= result.getLearnerComments() %></td>
+      
                 </tr>
             <% } %>
         </tbody>

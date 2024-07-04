@@ -99,13 +99,13 @@
                <td>
 			
 			<input type="hidden" name="updateid" value="<%=video.getId()%>">
-			<button type="submit" title="delete" onclick="location.href='Update.jsp?updateid=<%= video.getId() %> '">Update</button>
+			<button type="submit" title="delete" onclick="location.href='updateVideo.jsp?updateid=<%= video.getId() %> '">Update</button>
 			
 			</td>
 			<td>
-			<form action="ViewVideos" method="post">
+			<form action="deleteVideo" method="post">
 			<input type="hidden" name="action" value="Delete">
-			<input type="hidden" name="delete" value=<%=video.getId()%>>
+			<input type="hidden" name="deleteId" value=<%=video.getId()%>>
 			<button type="submit" title="delete">Delete</button>
 			</td>
 			</form>

@@ -44,4 +44,7 @@ public class Result {
 		this.score = score;
 		this.percentage = percentage;
 	}
+	public Result() {
+		
+	}
 }

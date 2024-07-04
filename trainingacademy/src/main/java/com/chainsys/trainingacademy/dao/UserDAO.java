@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.chainsys.trainingacademy.model.Comments;
 import com.chainsys.trainingacademy.model.Questions;
 import com.chainsys.trainingacademy.model.Result;
 import com.chainsys.trainingacademy.model.Users;
@@ -22,5 +23,10 @@ void addVideo(Videos insertvideo);
 List<Videos> getVideo(String category)throws ClassNotFoundException, SQLException;
 List<Questions> getAllQuestions()throws ClassNotFoundException,SQLException;
 List<Videos>getAllVideos()throws ClassNotFoundException,SQLException;
-List<Result>getAllComments()throws ClassNotFoundException,SQLException;
+void deleteQuestions(int id)throws ClassNotFoundException,SQLException;
+void updateQuestion(Questions updateQuestions,int updateId)throws ClassNotFoundException,SQLException;
+void updateVideo(Videos updateVideos)throws ClassNotFoundException,SQLException;
+void deleteVideo(int deleteId) throws ClassNotFoundException,SQLException;
+List<Result> getAllResults() throws ClassNotFoundException,SQLException;
+List<Comments>getAllComments() throws ClassNotFoundException,SQLException;
 }

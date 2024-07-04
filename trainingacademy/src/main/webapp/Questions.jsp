@@ -98,13 +98,13 @@
             <td>
 			
 			<input type="hidden" name="updateid" value="<%=question.getId() %>">
-			<button type="submit" title="delete" onclick="location.href='Update.jsp?updateid=<%= question.getId() %> '">Update</button>
+			<button type="submit" title="delete" onclick="location.href='updateQuestion.jsp?updateid=<%= question.getId() %> '">Update</button>
 			
 			</td>
 			<td>
-			<form action="ViewQuestions" method="post">
+			<form action="alterQuestions" method="post">
 			<input type="hidden" name="action" value="Delete">
-			<input type="hidden" name="delete" value=<%=question.getId()%>>
+			<input type="hidden" name="deleteId" value=<%=question.getId()%>>
 			<button type="submit" title="delete">Delete</button>
 			</td>
 			</form>
