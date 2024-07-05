@@ -1,17 +1,17 @@
 package com.chainsys.trainingacademy.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Course {
-	 int courseId;
-	 String courseName;
-	 String paymentType;
-	 String accoutNumber;
-	 String date;
-	 int amount;
-	public int getCourseid() {
+	int courseId;
+	String courseName;
+	String courseType;
+	byte[] courseImage;
+	public int getCourseId() {
 		return courseId;
 	}
-	public void setCourseid(int courseid) {
-		this.courseId = courseid;
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
 	}
 	public String getCourseName() {
 		return courseName;
@@ -19,38 +19,27 @@ public class Course {
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
 	}
-	public String getPaymentType() {
-		return paymentType;
+	public String getCourseType() {
+		return courseType;
 	}
-	public void setPaymentType(String paymentType) {
-		this.paymentType = paymentType;
+	public void setCourseType(String courseType) {
+		this.courseType = courseType;
 	}
-	public String getAccoutNumber() {
-		return accoutNumber;
-	}
-	public void setAccoutNumber(String accoutNumber) {
-		this.accoutNumber = accoutNumber;
-	}
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
-	}
-	public int getAmount() {
-		return amount;
-	}
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
-	public Course(int courseId, String courseName, String paymentType, String accoutNumber, String date, int amount) {
+	public Course(int courseId, String courseName, String courseType, byte[] courseImage) {
 		super();
 		this.courseId = courseId;
 		this.courseName = courseName;
-		this.paymentType = paymentType;
-		this.accoutNumber = accoutNumber;
-		this.date = date;
-		this.amount = amount;
+		this.courseType = courseType;
+		this.courseImage = courseImage;
 	}
-
+	public Course() {
+	}
+	
+	public byte[] getCourseImage() {
+		return courseImage;
+	}
+	public void setCourseImage(byte[] courseImage) {
+		this.courseImage = courseImage;
+	}
+	
 }

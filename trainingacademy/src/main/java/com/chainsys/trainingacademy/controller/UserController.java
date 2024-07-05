@@ -1,5 +1,8 @@
 package com.chainsys.trainingacademy.controller;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chainsys.trainingacademy.dao.UserDAO;
 import com.chainsys.trainingacademy.model.Users;
+import com.chainsys.trainingacademy.model.Course;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -51,8 +55,8 @@ public String userLogin(@RequestParam("email") String email,@RequestParam("passw
     insertLoginDetails.setPassword(password);
     if(userdao.insertLogin(insertLoginDetails))
     {
-    Users id=userdao.getId(insertLoginDetails);	
-    session.setAttribute("id", id);
+    Users userId=userdao.getId(insertLoginDetails);	
+    session.setAttribute("userId", userId);
     if(email.endsWith("@systech.com")&& password.endsWith("Vasanth@1761"))
 	{
    
@@ -60,7 +64,7 @@ public String userLogin(@RequestParam("email") String email,@RequestParam("passw
 	}
 	else
 	{
-		return "course.jsp";
+		return "viewCourse.jsp";
 	}
 	
     }
@@ -72,5 +76,21 @@ public String userLogin(@RequestParam("email") String email,@RequestParam("passw
 }
 
 
+@PostMapping("/selectCourse")
+public String Course(@RequestParam("action")String course,Model model)
+{
+	System.out.println(course);
+	try {
+		List<Course>viewCourse=userdao.getCourseType(course);
+		model.addAttribute("viewCourse", viewCourse);
+	} catch (ClassNotFoundException e) {
+		
+		e.printStackTrace();
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+return "course.jsp";
+}
 }
 

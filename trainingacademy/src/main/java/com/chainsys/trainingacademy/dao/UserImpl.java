@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.chainsys.trainingacademy.model.Comments;
+import com.chainsys.trainingacademy.model.Course;
 import com.chainsys.trainingacademy.model.Questions;
 import com.chainsys.trainingacademy.model.Result;
 import com.chainsys.trainingacademy.model.Users;
@@ -142,6 +143,25 @@ public List<Comments> getAllComments() throws ClassNotFoundException, SQLExcepti
 	String query="select learner_id,learner_name,learner_course,learner_comments from learner_comments";
 	List<Comments>viewComments=jdbcTemplate.query(query,new ViewCommentMapper());
 	return viewComments;
+}
+@Override
+public void insertCourse(Course addCourse) throws ClassNotFoundException, SQLException {
+	String query="insert into add_course(course_name,course_type,course_image) values(?,?,?) ";
+	Object[]course= {addCourse.getCourseName(),addCourse.getCourseType(),addCourse.getCourseImage()};
+	jdbcTemplate.update(query,course);
+}
+@Override
+public List<Course> viewCourse() throws ClassNotFoundException, SQLException {
+	String query="select course_id,course_name,course_type,course_image from add_course";
+	List<Course>viewCourse=jdbcTemplate.query(query,new ViewCourseMapper());
+	return viewCourse;
+}
+@Override
+public List<Course> getCourseType(String course) throws ClassNotFoundException, SQLException {
+	String query="select course_id,course_name,course_type,course_image from add_course WHERE course_type=?";
+	Object[]courseType= {course};
+	List <Course>viewCourse=jdbcTemplate.query(query,new ViewCourseMapper(),courseType);
+	return viewCourse;
 }
 	
 }

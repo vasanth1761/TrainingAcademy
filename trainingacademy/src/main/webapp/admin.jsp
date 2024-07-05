@@ -122,6 +122,7 @@
         <li><a href="addVideo.jsp">Add Video</a></li>
         <li><a href="viewVideos">View videos</a></li>
         <li><a href="viewQuestions">View questions</a></li>
+        <li><a href="addCourse.jsp">AddCourse</a></li>
         
     </ul>
 </div>

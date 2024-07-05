@@ -1,5 +1,6 @@
 package com.chainsys.trainingacademy.controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,8 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.chainsys.trainingacademy.dao.UserDAO;
 import com.chainsys.trainingacademy.model.Comments;
+import com.chainsys.trainingacademy.model.Course;
 import com.chainsys.trainingacademy.model.Questions;
 import com.chainsys.trainingacademy.model.Result;
 import com.chainsys.trainingacademy.model.Videos;
@@ -239,4 +243,45 @@ public class InstructorController {
 	}
 	return "viewComments.jsp";
 }
+	@PostMapping("/course")
+	public String addCourse(@RequestParam("coursename")String courseName,@RequestParam("coursetype")String courseType,@RequestParam("filePart")MultipartFile courseImage,Model model)
+	{   
+		
+
+		byte[] imageBytes = null;
+        if (!courseImage.isEmpty()) 
+            try {
+                imageBytes = courseImage.getBytes();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "error";
+            }
+       
+		Course addCourse= new Course();
+		addCourse.setCourseName(courseName);
+		addCourse.setCourseType(courseType);
+		addCourse.setCourseImage(imageBytes);
+		
+		try {
+			userdao.insertCourse(addCourse);
+		} catch (ClassNotFoundException e) {
+
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			List<Course>course=userdao.viewCourse();
+			model.addAttribute("viewCourse",course);
+			
+		} catch (ClassNotFoundException e) {
+		
+			e.printStackTrace();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return "course.jsp";
+		
+	}
 }
