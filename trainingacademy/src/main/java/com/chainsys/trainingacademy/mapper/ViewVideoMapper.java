@@ -16,6 +16,7 @@ public class ViewVideoMapper implements RowMapper<Videos> {
 		getVideoDetails.setTitle(rs.getString("VideoTitle"));
 		getVideoDetails.setLink(rs.getString("VideoLink"));
 		getVideoDetails.setCategory(rs.getString("Category"));
+		getVideoDetails.setModuleType(rs.getString("video_type"));
 		return getVideoDetails;
 	}
 	

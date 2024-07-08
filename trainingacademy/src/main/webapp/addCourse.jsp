@@ -106,6 +106,9 @@ form input[type="file"]:focus {
         <label for="courseimage">Course Image:</label>
         <input type="file" id="courseimage" name="filePart" accept="image/*" required><br><br>
         
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" name="amount" required><br><br>
+        
         <button type="submit">Add Course</button>
     </form>
 </body>

@@ -103,31 +103,36 @@
             font-size: 14px;
             color: #666;
         }
+        h1{
+        margin-left:300px;
+        }
     </style>
 </head>
 <body>
 
-<div class="navbar">
-    <a href="admin.jsp">Home</a>
-    <div>
-        <a href="Home.jsp">Logout</a>
-    </div>
-</div>
 
 <div class="sidebar">
-    <h2>Welcome Vasanth</h2>
+    <h2>Systech</h2>
     <ul>
+ 
         <li><a href="home.html">Home</a></li>
         <li><a href="addQuestions.jsp">Add Question</a></li>
         <li><a href="addVideo.jsp">Add Video</a></li>
         <li><a href="viewVideos">View videos</a></li>
         <li><a href="viewQuestions">View questions</a></li>
         <li><a href="addCourse.jsp">AddCourse</a></li>
+        <li><a href="">Logout</a></li>
         
     </ul>
 </div>
+<div>
+   <h1>Welcome vasanth!!</h1><br><br>
+   </div>
+  
 
 <div class="content">
+
+  
     <div class="card" onclick="location.href='viewResult';">
         <div class="card-title">
             Learners Result

@@ -128,7 +128,7 @@
 <body>
 <% Users userName = (Users) session.getAttribute("userId"); %>
 <div class="navbar">
-    <span>Course Dashboard</span>
+    <span>Systech</span>
     <div class="profile-section">
         <img src="image/profile.png" alt="User Symbol">
         <span class="username" id="username"><%= userName.getName()%></span>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.chainsys.trainingacademy.model.Course"%>
+<%@ page import="com.chainsys.trainingacademy.model.Users"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html>
@@ -10,44 +11,43 @@
 <title>Category Details</title>
 <style>
 .navbar {
-        display: flex;
-        justify-content: space-between; 
-        align-items: center;
-        background-color: #0056b3;
-        padding: 10px 20px;
-        color: white;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-    }
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    background-color: #0056b3;
+    padding: 10px 20px;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
 
-    .navbar span {
-        font-size: 18px;
-        margin-right: 10px;
-    }
+.navbar span {
+    font-size: 18px;
+    margin-right: 10px;
+}
 
-    .navbar .profile-section {
-        display: flex;
-        align-items: center;
-        cursor: pointer; 
-        position: relative; 
-    }
+.navbar .profile-section {
+    display: flex;
+    align-items: center;
+    cursor: pointer; 
+    position: relative; 
+}
 
-    .navbar img {
-        width: 30px;
-        height: 30px;
-        margin-right: 10px;
-        border-radius: 50%; 
-    }
-
+.navbar img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 50%; 
+}
 
 .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     max-width: 1000px; 
-    margin: 0 auto;
+    margin: 100px auto 0 auto; /* Adjusted margin for better layout */
 }
 
 h1 {
@@ -96,39 +96,52 @@ h1 {
     object-fit: cover; 
 }
 
+.button-style {
+    background-color: #0056b3; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
-
-
-
+.button-style:hover {
+    background-color: #4CAF50;
+}
 </style>
 </head>
 <body>
-
-<%-- <div class="navbar">
-    <span></span>
+<% Users userName = (Users) session.getAttribute("userId"); %>
+<div class="navbar">
+    <span>Systech</span>
     <div class="profile-section">
-        <img src="image/profile.png" alt="User Symbol">
+        <img src="image/profile.png" alt="Profile Picture">
         <span class="username" id="username"><%= userName.getName()%></span>
-        <div class="dropdown-content">
-            <a href="#">Profile</a>
-            <a href="#">Logout</a>
-            
-        </div>
+       
     </div>
-</div> --%>
- 
-    <div class="container">
-  
-        <% List<Course> course = (List<Course>) request.getAttribute("viewCourse");
-           for (Course category : course) { %>
-               <div class="card">
-                   
-                   <div class="card-body">
-                       <img src="data:image/jpeg;base64,<%= Base64.getEncoder().encodeToString(category.getCourseImage()) %>" alt="Category Image" />
-                       <h3><%= category.getCourseName() %></h3>
-                   </div>
+</div>
+
+<div class="container">
+    <% List<Course> courses = (List<Course>) request.getAttribute("viewCourse");
+       for (Course course : courses) { %>
+           <div class="card">
+               <div class="card-body">
+                   <img src="data:image/jpeg;base64,<%= Base64.getEncoder().encodeToString(course.getCourseImage()) %>" alt="Course Image" />
+                   <h2><%= course.getCourseName() %></h2>
+                   <form action="/selectedCourse" method="post">
+                       <input type="hidden" name="courseid" value="<%= course.getCourseId() %>">
+                       <input type="hidden" name="coursename" value="<%= course.getCourseName() %>">
+                       <input type="hidden" name="courseamount" value="<%= course.getAmount() %>">
+                       <button class="button-style" type="submit">₹<%= course.getAmount() %></button>
+                   </form>
                </div>
-           <% } %>
-    </div>
+           </div>
+       <% } %>
+</div>
 </body>
 </html>

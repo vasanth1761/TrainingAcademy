@@ -2,12 +2,13 @@ package com.chainsys.trainingacademy.model;
 
 public class Videos {
 	int id;
-    public Videos(int id, String title, String link, String category) {
+    public Videos(int id, String title, String link, String category,String moduleType) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.link = link;
 		this.category = category;
+		this.moduleType=moduleType;
 	}
 	public Videos() {
 		
@@ -39,6 +40,13 @@ public class Videos {
 	String title;
     String link;
     String category;
+    String moduleType;
+	public String getModuleType() {
+		return moduleType;
+	}
+	public void setModuleType(String moduleType) {
+		this.moduleType = moduleType;
+	}
     
    
 

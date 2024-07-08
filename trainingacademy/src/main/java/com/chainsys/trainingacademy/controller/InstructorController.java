@@ -49,16 +49,18 @@ public class InstructorController {
 		
 	}
 	@PostMapping("/addVideo")
-	public String video(@RequestParam("title")String title,@RequestParam("link")String link,@RequestParam("category")String category,Model model)
+	public String video(@RequestParam("title")String title,@RequestParam("link")String link,@RequestParam("category")String category,@RequestParam("type")String moduleType,Model model)
 	{   
+
 		Videos video=new Videos();
 		video.setLink(link);
 		video.setTitle(title);
 		video.setCategory(category);
+		video.setModuleType(moduleType);
 		String course=video.getCategory();
 		userdao.addVideo(video);
 		try {
-			List<Videos> viewVideos=userdao.getVideo(course);
+			List<Videos> viewVideos=userdao.getVideo(video,course);
 			model.addAttribute("video",viewVideos);
 		} catch (ClassNotFoundException | SQLException e) {
 
@@ -244,7 +246,7 @@ public class InstructorController {
 	return "viewComments.jsp";
 }
 	@PostMapping("/course")
-	public String addCourse(@RequestParam("coursename")String courseName,@RequestParam("coursetype")String courseType,@RequestParam("filePart")MultipartFile courseImage,Model model)
+	public String addCourse(@RequestParam("coursename")String courseName,@RequestParam("coursetype")String courseType,@RequestParam("filePart")MultipartFile courseImage,@RequestParam("amount")int amount,Model model)
 	{   
 		
 
@@ -261,6 +263,7 @@ public class InstructorController {
 		addCourse.setCourseName(courseName);
 		addCourse.setCourseType(courseType);
 		addCourse.setCourseImage(imageBytes);
+		addCourse.setAmount(amount);
 		
 		try {
 			userdao.insertCourse(addCourse);

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.chainsys.trainingacademy.model.Comments;
 import com.chainsys.trainingacademy.model.Course;
+import com.chainsys.trainingacademy.model.LearnerPaymentStatus;
 import com.chainsys.trainingacademy.model.Questions;
 import com.chainsys.trainingacademy.model.Result;
 import com.chainsys.trainingacademy.model.Users;
@@ -77,16 +78,16 @@ public class UserImpl implements UserDAO {
 }
 	@Override
 	public void addVideo(Videos insertvideo) {
-		String query="insert into videos(VideoTitle,VideoLink,Category)values(?,?,?)";
-		Object[]video= {insertvideo.getTitle(),insertvideo.getLink(),insertvideo.getCategory()};
+		String query="insert into videos(VideoTitle,VideoLink,Category,video_type)values(?,?,?,?)";
+		Object[]video= {insertvideo.getTitle(),insertvideo.getLink(),insertvideo.getCategory(),insertvideo.getModuleType()};
 		jdbcTemplate.update(query,video);
 	}
 	
 	@Override
 	
-	public List<Videos> getVideo(String category)throws ClassNotFoundException, SQLException{
-		String query="select VideoID,VideoTitle,VideoLink,VideoLink,Category from videos where category=?";
-		Object[]course= {category};
+	public List<Videos> getVideo(Videos video,String category)throws ClassNotFoundException, SQLException{
+		String query="select VideoID,VideoTitle,VideoLink,VideoLink,Category,video_type from videos where category=?&&video_type=?";
+		Object[]course= {category,video.getModuleType()};
 		List<Videos>user=jdbcTemplate.query(query,new ViewVideoMapper(),course);
 		return user;
 }
@@ -99,7 +100,7 @@ public class UserImpl implements UserDAO {
 	}
 	@Override
 	public List<Videos> getAllVideos() throws ClassNotFoundException, SQLException {
-		String query="select VideoID,VideoTitle,VideoLink,VideoLink,Category from videos";
+		String query="select VideoID,VideoTitle,VideoLink,VideoLink,Category,video_type from videos";
 		List<Videos>user=jdbcTemplate.query(query,new ViewVideoMapper());
 		return user;
 		
@@ -146,22 +147,44 @@ public List<Comments> getAllComments() throws ClassNotFoundException, SQLExcepti
 }
 @Override
 public void insertCourse(Course addCourse) throws ClassNotFoundException, SQLException {
-	String query="insert into add_course(course_name,course_type,course_image) values(?,?,?) ";
-	Object[]course= {addCourse.getCourseName(),addCourse.getCourseType(),addCourse.getCourseImage()};
+	String query="insert into add_course(course_name,course_type,course_image,course_amount) values(?,?,?,?) ";
+	Object[]course= {addCourse.getCourseName(),addCourse.getCourseType(),addCourse.getCourseImage(),addCourse.getAmount()};
 	jdbcTemplate.update(query,course);
 }
 @Override
 public List<Course> viewCourse() throws ClassNotFoundException, SQLException {
-	String query="select course_id,course_name,course_type,course_image from add_course";
+	String query="select course_id,course_name,course_type,course_image,course_amount from add_course";
 	List<Course>viewCourse=jdbcTemplate.query(query,new ViewCourseMapper());
 	return viewCourse;
 }
 @Override
 public List<Course> getCourseType(String course) throws ClassNotFoundException, SQLException {
-	String query="select course_id,course_name,course_type,course_image from add_course WHERE course_type=?";
+	String query="select course_id,course_name,course_type,course_image,course_amount from add_course WHERE course_type=?";
 	Object[]courseType= {course};
 	List <Course>viewCourse=jdbcTemplate.query(query,new ViewCourseMapper(),courseType);
 	return viewCourse;
 }
+@Override
+public List<Videos> getFreeModules(Course courseName) throws ClassNotFoundException, SQLException {
+	String videoType="free";
+	String query="select VideoID,VideoTitle,VideoLink,VideoLink,Category,video_type from videos where Category=?&&video_type=?";
+	Object[]type= {courseName.getCourseName(),videoType};
+	List<Videos>viewVideo=jdbcTemplate.query(query,new ViewVideoMapper(),type);
+	return viewVideo;
 	
 }
+@Override
+public void insertLearnerPayment(LearnerPaymentStatus insertPayment) throws ClassNotFoundException, SQLException {
+	String query= "INSERT INTO learner_payment(learner_id, learner_name, course_id, course_name, enroll_date, accountnumber, payment, amount) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+;
+	Object[]type= {insertPayment.getLearnerId(),insertPayment.getLearnerName(),insertPayment.getCourseId(),
+			insertPayment.getCourseName(),insertPayment.getDate(),insertPayment.getAccountNumber(),insertPayment.getPayment(),insertPayment.getAmount()};
+	jdbcTemplate.update(query,type);
+		
+			
+	}
+
+	
+}
+	
+

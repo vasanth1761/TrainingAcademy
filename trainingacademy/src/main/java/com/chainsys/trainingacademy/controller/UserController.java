@@ -1,6 +1,7 @@
 package com.chainsys.trainingacademy.controller;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chainsys.trainingacademy.dao.UserDAO;
 import com.chainsys.trainingacademy.model.Users;
+import com.chainsys.trainingacademy.model.Videos;
 import com.chainsys.trainingacademy.model.Course;
+import com.chainsys.trainingacademy.model.LearnerPaymentStatus;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -77,7 +80,7 @@ public String userLogin(@RequestParam("email") String email,@RequestParam("passw
 
 
 @PostMapping("/selectCourse")
-public String Course(@RequestParam("action")String course,Model model)
+public String course(@RequestParam("action")String course,Model model)
 {
 	System.out.println(course);
 	try {
@@ -91,6 +94,65 @@ public String Course(@RequestParam("action")String course,Model model)
 		e.printStackTrace();
 	}
 return "course.jsp";
+}
+
+
+@PostMapping("/selectedCourse")
+public String selectedCourse(@RequestParam("coursename")String courseName,@RequestParam("courseamount")int courseAmount,
+		@RequestParam("courseid")int id,
+		Model model,HttpSession session)
+{   
+	Course insertFreeCourse=new Course();
+	insertFreeCourse.setCourseName(courseName);
+	insertFreeCourse.setAmount(courseAmount);
+	insertFreeCourse.setCourseId(id);
+	session.setAttribute("course", insertFreeCourse);
+	try {
+		List<Videos>viewVideos=userdao.getFreeModules(insertFreeCourse);
+		model.addAttribute("courseFreeVideos", viewVideos);
+		
+		
+	} catch (ClassNotFoundException e) {
+
+		e.printStackTrace();
+	} catch (SQLException e) {
+
+		e.printStackTrace();
+	}
+	return "viewDemoVideo.jsp";
+	
+}
+
+
+
+
+@PostMapping("/paymentDetails")
+public String payment(@RequestParam("pay") String payment,@RequestParam("card_number")long accountNumber,HttpSession session)
+{
+	LocalDate d=LocalDate.now();
+    String date=d.toString();
+    LearnerPaymentStatus insertPayment=new LearnerPaymentStatus();
+    Course courseDetails =(Course) session.getAttribute("course");
+    Users userDetail=(Users)session.getAttribute("userId");
+    insertPayment.setCourseId(courseDetails.getCourseId());
+    insertPayment.setLearnerName(userDetail.getName());
+    insertPayment.setCourseId(courseDetails.getCourseId());
+    insertPayment.setCourseName(courseDetails.getCourseName());
+    insertPayment.setDate(date);
+    insertPayment.setAccountNumber(accountNumber);
+    insertPayment.setPayment(payment);
+    insertPayment.setAmount(courseDetails.getAmount());
+    try {
+		userdao.insertLearnerPayment(insertPayment);
+	} catch (ClassNotFoundException e) {
+
+		e.printStackTrace();
+	} catch (SQLException e) {
+	
+		e.printStackTrace();
+	}
+	return "paymentSuccess.jsp";
+	
 }
 }
 

@@ -7,6 +7,13 @@ public class Course {
 	String courseName;
 	String courseType;
 	byte[] courseImage;
+	int amount;
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
 	public int getCourseId() {
 		return courseId;
 	}
@@ -25,12 +32,13 @@ public class Course {
 	public void setCourseType(String courseType) {
 		this.courseType = courseType;
 	}
-	public Course(int courseId, String courseName, String courseType, byte[] courseImage) {
+	public Course(int courseId, String courseName, String courseType, byte[] courseImage,int amount) {
 		super();
 		this.courseId = courseId;
 		this.courseName = courseName;
 		this.courseType = courseType;
 		this.courseImage = courseImage;
+		this.amount=amount;
 	}
 	public Course() {
 	}

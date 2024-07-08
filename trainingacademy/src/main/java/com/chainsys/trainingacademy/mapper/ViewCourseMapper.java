@@ -17,6 +17,7 @@ public class ViewCourseMapper implements RowMapper<Course> {
 		viewCourse.setCourseType(rs.getString("course_type"));
 		viewCourse.setCourseImage(rs.getBytes("course_image"));
 		System.out.println(viewCourse.getCourseImage());
+		viewCourse.setAmount(rs.getInt("course_amount"));
 		return viewCourse;
 	}
 
