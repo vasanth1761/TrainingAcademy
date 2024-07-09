@@ -175,14 +175,28 @@ public List<Videos> getFreeModules(Course courseName) throws ClassNotFoundExcept
 }
 @Override
 public void insertLearnerPayment(LearnerPaymentStatus insertPayment) throws ClassNotFoundException, SQLException {
-	String query= "INSERT INTO learner_payment(learner_id, learner_name, course_id, course_name, enroll_date, accountnumber, payment, amount) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-;
+	String query= "INSERT INTO learner_payment(learner_id, learner_name, course_id, course_name, accountNumber, payment, amount,enroll_date) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
 	Object[]type= {insertPayment.getLearnerId(),insertPayment.getLearnerName(),insertPayment.getCourseId(),
-			insertPayment.getCourseName(),insertPayment.getDate(),insertPayment.getAccountNumber(),insertPayment.getPayment(),insertPayment.getAmount()};
-	jdbcTemplate.update(query,type);
-		
+			insertPayment.getCourseName(),insertPayment.getAccountNumber(),insertPayment.getPayment(),insertPayment.getAmount(),insertPayment.getDate()};
+	jdbcTemplate.update(query,type);	
 			
 	}
+@Override
+public List<Videos> viewCourseVideos(Course courseName) throws ClassNotFoundException, SQLException {
+	String videoType="notfree";
+	String query="select VideoID,VideoTitle,VideoLink,VideoLink,Category,video_type from videos where Category=?&&video_type=?";
+	Object[]type={courseName.getCourseName(),videoType};
+	List<Videos>viewVideo=jdbcTemplate.query(query,new ViewVideoMapper(),type);
+	return viewVideo;
+
+}
+@Override
+public List<Questions> viewCourseQuestion(Course courseName) throws ClassNotFoundException, SQLException {
+	String query="select id,questions,option_1,option_2,option_3,option_4,correct_answer,category from question";
+	List<Questions>user=jdbcTemplate.query(query,new ViewQuestionMapper());
+	return user;
+	
+}
 
 	
 }

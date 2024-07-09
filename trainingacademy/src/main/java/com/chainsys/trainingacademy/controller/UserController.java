@@ -16,6 +16,7 @@ import com.chainsys.trainingacademy.model.Users;
 import com.chainsys.trainingacademy.model.Videos;
 import com.chainsys.trainingacademy.model.Course;
 import com.chainsys.trainingacademy.model.LearnerPaymentStatus;
+import com.chainsys.trainingacademy.model.Questions;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -127,13 +128,14 @@ public String selectedCourse(@RequestParam("coursename")String courseName,@Reque
 
 
 @PostMapping("/paymentDetails")
-public String payment(@RequestParam("pay") String payment,@RequestParam("card_number")long accountNumber,HttpSession session)
+public String payment(@RequestParam("pay") String payment,@RequestParam("account-number")String accountNumber,HttpSession session)
 {
 	LocalDate d=LocalDate.now();
     String date=d.toString();
     LearnerPaymentStatus insertPayment=new LearnerPaymentStatus();
     Course courseDetails =(Course) session.getAttribute("course");
     Users userDetail=(Users)session.getAttribute("userId");
+    insertPayment.setLearnerId(userDetail.getId());
     insertPayment.setCourseId(courseDetails.getCourseId());
     insertPayment.setLearnerName(userDetail.getName());
     insertPayment.setCourseId(courseDetails.getCourseId());
@@ -154,5 +156,44 @@ public String payment(@RequestParam("pay") String payment,@RequestParam("card_nu
 	return "paymentSuccess.jsp";
 	
 }
+@RequestMapping("/selectedCourseVideos")
+public String selectedCourseVideos(HttpSession session,Model model)
+{   
+	Course courseDetails =(Course) session.getAttribute("course");
+	courseDetails.getCourseName();
+	try {
+		List<Videos>viewVideos=userdao.viewCourseVideos(courseDetails);
+		model.addAttribute("courseNotFreeVideos", viewVideos);
+	} catch (ClassNotFoundException e) {
+		
+		e.printStackTrace();
+	} catch (SQLException e) {
+	
+		e.printStackTrace();
+	}
+	return "selectedCourseVideo.jsp";
+	
+}
+@RequestMapping("/getQuestion")
+public String getQuestion(HttpSession session,Model model)
+{   
+	Course courseDetails =(Course) session.getAttribute("course");
+	courseDetails.getCourseName();
+
+	try {
+		List<Questions>viewQuestions=userdao.viewCourseQuestion(courseDetails);
+		model.addAttribute("viewQuestion",viewQuestions);
+	} catch (ClassNotFoundException e) {
+		
+		e.printStackTrace();
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+	
+	return "selectedCourseQuestions.jsp";
+	
+}
+
 }
 

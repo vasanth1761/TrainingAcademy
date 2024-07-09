@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
  </script>  
 <body>
-<form action="videoCategory" method="post">
+<form action="/selectedCourseVideos" method="post">
 <div class="container">
     <div class="content-box">
         <div class="payment-success">

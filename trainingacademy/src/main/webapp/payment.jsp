@@ -117,7 +117,7 @@
 
 <h2>Payment</h2>
 
-<form action="paymentDetails" method="post">
+<form action="paymentCard.jsp">
   <label for="learner_name">Learner Name:</label>
   <input type="text" id="learner_name" name="learner_name" value="<%=getName.getName() %>" required>
   
@@ -127,21 +127,8 @@
   <label for="learner_name">Total Amount:</label>
   <input type="text" id="learner_name" name="learner_name" value="<%=getCourseName.getAmount() %>" required>
   
-  <label for="card_type">Select Card Type:</label>
-  <select id="card_type" name="card_type">
-    <option value="credit">Credit Card</option>
-    <option value="debit">Debit Card</option>
-  </select>
-  
-  <label for="card_number">Card Number:</label>
-  <input type="text" id="card_number" name="card_number" pattern="[0-9]{12}" required>
-  
-  <label for="expiry_date">Expiry Date:</label>
-  <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" required>
-  
-  <label for="cvv">CVV:</label>
-  <input type="text" id="cvv" name="cvv" pattern="[0-9]{3}">
-  <input type="submit" name="pay"value="Paid">
+ 
+  <input type="submit" name="pay"value="Pay">
 </form>
 
 </body>

@@ -3,46 +3,12 @@
      <%@page import="java.util.List"%>
 <%@page import="com.chainsys.trainingacademy.model.Videos"%>
 <%@page import="com.chainsys.trainingacademy.model.Users"%>
-<%@page import="com.chainsys.trainingacademy.model.Course"%>
-
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Display Videos</title>
     <style>
-    .navbar {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-    background-color: #0056b3;
-    padding: 10px 20px;
-    color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-}
-
-.navbar span {
-    font-size: 18px;
-    margin-right: 10px;
-}
-
-.navbar .profile-section {
-    display: flex;
-    align-items: center;
-    cursor: pointer; 
-    position: relative; 
-}
-
-.navbar img {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-    border-radius: 50%; 
-}
         .module {
             max-width: 800px;
             margin: 0 auto;
@@ -144,37 +110,21 @@
     .profile-section:hover .dropdown-content {
         display: block;
     }
-    .name
-    {
-     margin-left:450px;
-    }
     </style>
 </head>
 <body>
- <% Users getName = (Users) session.getAttribute("userId"); %> 
- <%Videos getuser=(Videos)session.getAttribute("courseFreeVideos"); %>
- <%Course getCourseName=(Course)session.getAttribute("course"); %>
- 
- <div class="navbar">
-    <span>Course Dashboard</span>
+ <% Users user = (Users) session.getAttribute("userId"); %>
+<div class="navbar">
+    <span>Systech</span>
     <div class="profile-section">
         <img src="image/profile.png" alt="User Symbol">
-        <span class="username" id="username"><%= getName.getName()%></span>
-        <div class="dropdown-content">
-            <a href="#">Profile</a>
-            <a href="#">Logout</a>
-           
-        </div>
+        <span class="username" id="username"><%= user.getName()%></span>
+        
     </div>
 </div> 
-<br>
-<br>
-<br>
-<br>
-<h1 class="name">Welcome to <%=getCourseName.getCourseName() %> course</h1>
-<form action="payment.jsp">
+<form action="/getQuestion"method="post">
     <div class="module">
-        
+        <h1>Videos</h1>
         <table>
             <thead>
                 <tr>
@@ -186,17 +136,17 @@
                
                 <%
                
-                List<Videos> demoVideos = (List<Videos>) request.getAttribute("courseFreeVideos"); 
-                for (Videos video : demoVideos) { 
+                List<Videos> videos = (List<Videos>) request.getAttribute("courseNotFreeVideos"); 
+                for (Videos video : videos) { 
                 %>
                     <tr>
-                        <td><%= video.getTitle()%></td>
+                        <td><%= video.getTitle() %></td>
                         <td><iframe src="<%=video.getLink()%>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></td>
                     </tr>
                 <% } %>
             </tbody>
         </table>
-        <button class="take-test-button" type="submit">More Videos</button>
+        <button class="take-test-button">Take Test</button>
     </div>
     </form>
 </body>

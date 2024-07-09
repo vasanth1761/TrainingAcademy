@@ -36,6 +36,7 @@ List<Course>viewCourse() throws ClassNotFoundException,SQLException;
 List<Course>getCourseType(String course)throws ClassNotFoundException,SQLException;
 List<Videos> getFreeModules(Course video)throws ClassNotFoundException,SQLException;
 void insertLearnerPayment(LearnerPaymentStatus insertPayment)throws ClassNotFoundException,SQLException;
-
+List<Videos>viewCourseVideos(Course courseName)throws ClassNotFoundException,SQLException;
+List<Questions>viewCourseQuestion(Course courseName) throws ClassNotFoundException,SQLException;
 
 }

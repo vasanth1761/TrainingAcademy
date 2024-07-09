@@ -8,7 +8,7 @@ public class LearnerPaymentStatus {
 	int courseId;
 	String courseName;
 	String date;
-	long accountNumber;
+	String accountNumber;
 	String payment;
 	int amount;
 	public int getAmount() {
@@ -47,10 +47,10 @@ public class LearnerPaymentStatus {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public long getAccountNumber() {
+	public String getAccountNumber() {
 		return accountNumber;
 	}
-	public void setAccountNumber(long accountNumber) {
+	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 	public String getPayment() {
@@ -60,7 +60,7 @@ public class LearnerPaymentStatus {
 		this.payment = payment;
 	}
 	public LearnerPaymentStatus(int learnerId, String learnerName, int courseId, String courseName, String date,
-			long accountNumber, String payment,int amount) {
+			String accountNumber, String payment,int amount) {
 		super();
 		this.learnerId = learnerId;
 		this.learnerName = learnerName;
