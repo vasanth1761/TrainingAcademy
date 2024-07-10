@@ -93,7 +93,7 @@
 
  <center><h1>Take Quiz</h1></center>
     <div class="container">
-        <form action="CheckResult" method="post">
+        <form action="/checkResult" method="post">
             <%
             List<Questions> questions = (List<Questions>) request.getAttribute("viewQuestion");
                                        int i=1;

@@ -68,7 +68,7 @@ button[type="submit"]:hover {
  .google-btn {
   margin-top: 10px;
   width: 100%;
-  max-width: 200px; /* Adjust the max-width */
+  max-width: 200px; 
 }
 </style>
 </head>

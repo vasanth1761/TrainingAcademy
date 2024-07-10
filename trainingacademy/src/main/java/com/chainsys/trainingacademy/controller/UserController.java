@@ -2,7 +2,9 @@ package com.chainsys.trainingacademy.controller;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import com.chainsys.trainingacademy.model.Videos;
 import com.chainsys.trainingacademy.model.Course;
 import com.chainsys.trainingacademy.model.LearnerPaymentStatus;
 import com.chainsys.trainingacademy.model.Questions;
+import com.chainsys.trainingacademy.model.Result;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -194,6 +197,101 @@ public String getQuestion(HttpSession session,Model model)
 	return "selectedCourseQuestions.jsp";
 	
 }
+@PostMapping("/checkResult")
+public String checkResultPost(@RequestParam Map<String, String> allParams, HttpSession session, Model model) {
+    Map<String, String> answersMap = new HashMap<>();
+    System.out.println("hi");
+    System.out.println(allParams);
 
+    for (Map.Entry<String, String> entry : allParams.entrySet()) {
+        if (entry.getKey().startsWith("answer")) {
+            String questionId = entry.getKey().substring("answer".length());
+            answersMap.put(questionId, entry.getValue());
+        }
+    }
+
+	
+	List<Map<Integer, String>> correctAnswersMap; 
+	   try {
+			   correctAnswersMap =userdao.getAllCorrectAnswers(); 
+			   System.out.println("hi vasanth");
+			   System.out.println(correctAnswersMap);
+			   } catch
+	   (ClassNotFoundException | SQLException e) 
+	   { 
+				   e.printStackTrace(); 
+				   return "error"; 
+	    
+				   }
+	
+	   int correctCount = 0;
+       int totalCount = answersMap.size();
+       int attemptedCount = 0;
+       
+       for (Map.Entry<String, String> entry : answersMap.entrySet()) {
+           String questionId = entry.getKey();
+           String userAnswer = entry.getValue();
+           String correctAnswer = null;
+           
+           for (Map<Integer, String> correctAnswerMap : correctAnswersMap) {
+               correctAnswer = correctAnswerMap.get(Integer.parseInt(questionId));
+               if (correctAnswer != null) break;
+           }
+           
+           if (correctAnswer != null) {
+               attemptedCount++;
+               if (correctAnswer.equals(userAnswer)) {
+                   correctCount++;
+               }
+           }
+       }
+
+       double percentage = (correctCount * 100.0) / totalCount;
+      
+       Result results = new Result();
+       Users user = (Users) session.getAttribute("userId");
+       Course courseName = (Course) session.getAttribute("course");
+       results.setId(user.getId());
+       results.setName(user.getName());
+       results.setCourse(courseName.getCourseName());
+       results.setScore(correctCount);
+       results.setPercentage(percentage);
+       session.setAttribute("result", results);
+       model.addAttribute("name",user.getName());
+       model.addAttribute("totalCount",totalCount);
+       model.addAttribute("correctCount",correctCount);
+       model.addAttribute("percentage",percentage);
+       return "result.jsp";
 }
+@PostMapping("/PercentageVerification")
+public String percentageVerification(@RequestParam("percentage")String percentage,HttpSession session,Model model ) 
+{   
+	double percentagee = Double.parseDouble(percentage);
+    if (percentagee >= 80) {
+
+    	Result result=(Result)session.getAttribute("result");
+	    
+	    try {
+			userdao.insertUserResult(result);
+		} catch (ClassNotFoundException | SQLException e) {
+		
+			e.printStackTrace();
+		}
+	    
+	    return "certificate.jsp";
+            
+        } 
+       else 
+        {
+        	model.addAttribute("errorMessage", "you didnt pass the exam so learn again ");
+        	
+        }
+
+
+	return "sorryPage.jsp";
+	
+}
+}
+
+
 

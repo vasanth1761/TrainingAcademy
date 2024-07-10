@@ -6,6 +6,13 @@ public class Result {
 	String course;
 	int score;
 	double percentage;
+	int totalCount;
+	public int getTotalCount() {
+		return totalCount;
+	}
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
 	public int getId() {
 		return id;
 	}
@@ -36,13 +43,14 @@ public class Result {
 	public void setPercentage(double percentage) {
 		this.percentage = percentage;
 	}
-	public Result(int id, String name, String course, int score, double percentage) {
+	public Result(int id, String name, String course, int score, double percentage,int totalCount) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.course = course;
 		this.score = score;
 		this.percentage = percentage;
+		this.totalCount=totalCount;
 	}
 	public Result() {
 		

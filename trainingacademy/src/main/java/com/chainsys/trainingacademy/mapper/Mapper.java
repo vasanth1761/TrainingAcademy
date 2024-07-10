@@ -16,8 +16,7 @@ public class Mapper implements RowMapper<Users>{
 		
 	   user.setId(rs.getInt("user_id"));
 	   user.setName(rs.getString("user_name"));
-		
-		return user;
+	   return user;
 		
 	}
 

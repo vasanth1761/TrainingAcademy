@@ -47,7 +47,7 @@
     flex-wrap: wrap;
     justify-content: center;
     max-width: 1000px; 
-    margin: 100px auto 0 auto; /* Adjusted margin for better layout */
+    margin: 100px auto 0 auto; 
 }
 
 h1 {

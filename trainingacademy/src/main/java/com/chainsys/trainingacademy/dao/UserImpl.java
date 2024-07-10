@@ -1,6 +1,7 @@
 package com.chainsys.trainingacademy.dao;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -75,7 +76,7 @@ public class UserImpl implements UserDAO {
 		return user;
 		
 	
-}
+    }
 	@Override
 	public void addVideo(Videos insertvideo) {
 		String query="insert into videos(VideoTitle,VideoLink,Category,video_type)values(?,?,?,?)";
@@ -165,7 +166,8 @@ public List<Course> getCourseType(String course) throws ClassNotFoundException, 
 	return viewCourse;
 }
 @Override
-public List<Videos> getFreeModules(Course courseName) throws ClassNotFoundException, SQLException {
+public List<Videos> getFreeModules(Course courseName) throws ClassNotFoundException, SQLException 
+{
 	String videoType="free";
 	String query="select VideoID,VideoTitle,VideoLink,VideoLink,Category,video_type from videos where Category=?&&video_type=?";
 	Object[]type= {courseName.getCourseName(),videoType};
@@ -174,7 +176,8 @@ public List<Videos> getFreeModules(Course courseName) throws ClassNotFoundExcept
 	
 }
 @Override
-public void insertLearnerPayment(LearnerPaymentStatus insertPayment) throws ClassNotFoundException, SQLException {
+public void insertLearnerPayment(LearnerPaymentStatus insertPayment) throws ClassNotFoundException, SQLException
+{
 	String query= "INSERT INTO learner_payment(learner_id, learner_name, course_id, course_name, accountNumber, payment, amount,enroll_date) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
 	Object[]type= {insertPayment.getLearnerId(),insertPayment.getLearnerName(),insertPayment.getCourseId(),
 			insertPayment.getCourseName(),insertPayment.getAccountNumber(),insertPayment.getPayment(),insertPayment.getAmount(),insertPayment.getDate()};
@@ -182,7 +185,8 @@ public void insertLearnerPayment(LearnerPaymentStatus insertPayment) throws Clas
 			
 	}
 @Override
-public List<Videos> viewCourseVideos(Course courseName) throws ClassNotFoundException, SQLException {
+public List<Videos> viewCourseVideos(Course courseName) throws ClassNotFoundException, SQLException 
+{
 	String videoType="notfree";
 	String query="select VideoID,VideoTitle,VideoLink,VideoLink,Category,video_type from videos where Category=?&&video_type=?";
 	Object[]type={courseName.getCourseName(),videoType};
@@ -191,14 +195,41 @@ public List<Videos> viewCourseVideos(Course courseName) throws ClassNotFoundExce
 
 }
 @Override
-public List<Questions> viewCourseQuestion(Course courseName) throws ClassNotFoundException, SQLException {
-	String query="select id,questions,option_1,option_2,option_3,option_4,correct_answer,category from question";
-	List<Questions>user=jdbcTemplate.query(query,new ViewQuestionMapper());
+public List<Questions> viewCourseQuestion(Course courseName) throws ClassNotFoundException, SQLException
+{
+	String query="select id,questions,option_1,option_2,option_3,option_4,correct_answer,category from question where category=?";
+	Object[] type= {courseName.getCourseName()};
+	List<Questions>user=jdbcTemplate.query(query,new ViewQuestionMapper(),type);
 	return user;
 	
 }
-
+@Override
+public   List<Map<Integer, String>> getAllCorrectAnswers() throws ClassNotFoundException, SQLException 
+{
+	String query="SELECT id,correct_answer from question";
+    List<Map<Integer, String>> map= jdbcTemplate.query(query, new ViewCorrectAnswerMapper());
+    return map;
 	
+}
+@Override
+public void insertUserResult(Result result) throws ClassNotFoundException, SQLException 
+{
+	String query="insert into learners_result (learner_id,learner_name,learner_course,learner_score,learner_percentage) values(?,?,?,?,?)";
+	Object[]insertResult= {result.getId(),result.getName(),result.getCourse(),result.getScore(),result.getPercentage()};
+    jdbcTemplate.update(query,insertResult);
+	
+}
+@Override
+public boolean checkExistingCourse(String courseName) throws ClassNotFoundException, SQLException {
+	String query="SELECT count(*)FROM learner_payment  WHERE course_name =?";
+	Object[]type= {courseName};
+	int count=jdbcTemplate.update(query,type);
+	if(count==0)
+	{
+		return true;
+	}
+	return false;
+}
 }
 	
 
