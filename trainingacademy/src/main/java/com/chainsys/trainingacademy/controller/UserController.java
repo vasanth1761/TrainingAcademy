@@ -194,10 +194,10 @@ public String getQuestion(HttpSession session,Model model)
 		e.printStackTrace();
 	}
 	
-	return "selectedCourseQuestions.jsp";
+	return "viewTest.jsp";
 	
 }
-@PostMapping("/checkResult")
+@RequestMapping("/checkResult")
 public String checkResultPost(@RequestParam Map<String, String> allParams, HttpSession session, Model model) {
     Map<String, String> answersMap = new HashMap<>();
     System.out.println("hi");

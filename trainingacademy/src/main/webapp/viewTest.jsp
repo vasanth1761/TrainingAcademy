@@ -70,11 +70,11 @@ button:hover, #submitBtn:hover {
 <body>
     <form id="quizForm" action="/checkResult" method="post" onsubmit="return validateForm();">
         <div id="examName">
-            <h2>MCQ Questions</h2>
+            <h2>Questions</h2>
         </div>
 
         <div id="timer">
-            Time Left: <span id="time">5:00</span>
+            Time Left: <span id="time">1:00</span>
         </div>
 
         <%
@@ -115,7 +115,7 @@ button:hover, #submitBtn:hover {
     <script>
         var currentQuestion = 0;
         var totalQuestions = <%=questions.size()%>;
-        var examDuration = 1 * 60; // 5 minutes in seconds
+        var examDuration = 1 * 60; 
 
         function startTimer(duration, display) {
             var timer = duration, minutes, seconds;
