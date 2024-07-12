@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function() {
     <table border="1">
         <tr>
             <th>Name</th>
-            <th>Total Questions Attempted</th>
+            <th>Total Questions </th>
             <th>Correct Answers</th>
             <th>Percentage</th>
         </tr>

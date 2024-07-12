@@ -41,6 +41,7 @@ public List<Videos>viewCourseVideos(Course courseName)throws ClassNotFoundExcept
 public List<Questions>viewCourseQuestion(Course courseName) throws ClassNotFoundException,SQLException;
 public List<Map<Integer, String>> getAllCorrectAnswers()throws ClassNotFoundException,SQLException;
 public void insertUserResult(Result result)throws ClassNotFoundException,SQLException;
-public boolean checkExistingCourse(String courseName)throws ClassNotFoundException,SQLException;
-
+public boolean checkExistingCourse(String courseName,int userId)throws ClassNotFoundException,SQLException;
+public boolean changePayment(String name,int id)throws ClassNotFoundException,SQLException;
+public void insertComment(Comments comment)throws ClassNotFoundException,SQLException;
 }

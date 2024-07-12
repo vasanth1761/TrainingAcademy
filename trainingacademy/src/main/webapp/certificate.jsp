@@ -119,7 +119,7 @@ Users userName = (Users) session.getAttribute("userId");
             </div>
 
             <div class="reason">
-              <%=course %>  Course Successfully Completed 
+              <%=course.getCourseName() %>  Course Successfully Completed 
             </div>
 
 
@@ -127,7 +127,7 @@ Users userName = (Users) session.getAttribute("userId");
     </a>
 
     <div class="adjust">
-        <a href="thankyou.jsp" class="extra-course-link">Click here </a>to add an extra course
+        <a href="thankYou.jsp" class="extra-course-link">Click here </a>to add an extra course
     </div>
 </body>
 </html>

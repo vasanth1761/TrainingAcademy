@@ -82,11 +82,15 @@ document.addEventListener("DOMContentLoaded", function() {
  </script>       
 <body>
  <div> 
+ <% if (request.getAttribute("error") != null) { %>
+        <div class="alert alert-danger"><%= request.getAttribute("error") %></div>
+    <% } %>
 <form action ="/login" method="post">
  <h1>Login</h1>
 
- <input type="email"name="email"placeholder="Enter the Email"><br><br>
- <input type="password" name="password" placeholder="Password"pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#&]).{5,}"><br><br>
+ <input type="email"name="email"placeholder="Enter the Email" required><br><br>
+
+ <input type="password" name="password" placeholder="Password"pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#&]).{5,}"required><br><br>
 
  <input type="hidden"  name="action" value="login"> 
  <button type="submit" >login</button>
@@ -94,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function() {
  
 
  <center>
-      <p>Don't have an account? <a href="Register.jsp">Click here</a></p>
+      <p>Don't have an account? <a href="register.jsp">Click here</a></p>
  </center>  
 </form>
 </div>

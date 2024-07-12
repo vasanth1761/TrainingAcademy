@@ -220,15 +220,34 @@ public void insertUserResult(Result result) throws ClassNotFoundException, SQLEx
 	
 }
 @Override
-public boolean checkExistingCourse(String courseName) throws ClassNotFoundException, SQLException {
-	String query="SELECT count(*)FROM learner_payment  WHERE course_name =?";
-	Object[]type= {courseName};
-	int count=jdbcTemplate.update(query,type);
+public boolean checkExistingCourse(String courseName,int userId) throws ClassNotFoundException, SQLException {
+	String query="SELECT count(*)FROM learner_payment  WHERE course_name =?&&learner_id=?";
+	Object[]type= {courseName,userId};
+	int count=jdbcTemplate.queryForObject(query,Integer.class,type);
 	if(count==0)
 	{
-		return true;
+		return false;
 	}
-	return false;
+	return true;
+}
+@Override
+public boolean changePayment(String name,int id) throws ClassNotFoundException, SQLException {
+	String query="SELECT payment_id FROM learner_payment  WHERE course_name =?&&learner_id=?";
+	Object[]type= {name,id};
+	int count=jdbcTemplate.queryForObject(query,Integer.class,type);
+	try {
+		return count !=0;
+	}catch (Exception e) {
+		System.out.println("<-----");
+		return false;
+	}
+}
+@Override
+public void insertComment(Comments comment) throws ClassNotFoundException, SQLException {
+	String query="insert into learner_comment(learner_id,learner_name,learner_course,learner_comments) values (?,?,?,?)";
+	Object[]course= {comment.getLearnerId(),comment.getLearnerName(),comment.getLearnerCourse(),comment.getLearnerComments()};
+	jdbcTemplate.update(query,course);
+	
 }
 }
 	

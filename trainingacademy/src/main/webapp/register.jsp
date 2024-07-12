@@ -69,10 +69,13 @@ document.addEventListener("DOMContentLoaded", function() {
  </script>   
 <body>
 <div>
+<% if (request.getAttribute("error") != null) { %>
+        <div class="alert alert-danger"><%= request.getAttribute("error") %></div>
+    <% } %>
 <form id="registerForm" action="/register" method="post">
  <h1>REGISTER</h1>
  <input type="text" name="name" placeholder="Enter the name"  required><br><br>
- <input type="email" name="email" placeholder="Enter the Email"><br><br>
+ <input type="email" name="email" placeholder="Enter the Email"required><br><br>
  <input type="text" name="number" placeholder="Mobile" pattern="[0-9]{10}"required><br><br>
  <input type="password" name="password" placeholder="Password"pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#&]).{5,}"required><br><br>
  <input type="hidden" name="action" value="register"> 
@@ -105,6 +108,6 @@ $(document).ready(function(){
         });
     });
 });
-</script> -->
+</script> 
 </body>
 </html>

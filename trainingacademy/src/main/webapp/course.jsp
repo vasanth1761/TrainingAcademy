@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.chainsys.trainingacademy.model.Course"%>
 <%@ page import="com.chainsys.trainingacademy.model.Users"%>
+<%@ page import="com.chainsys.trainingacademy.dao.UserDAO"%>
+<%@ page import="org.springframework.context.ApplicationContext"%>
+<%@ page import="org.springframework.web.context.WebApplicationContext"%>
+<%@ page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
+
 <%@ page import="java.util.*"%>
 <%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html>
@@ -128,6 +133,7 @@ h1 {
 
 <div class="container">
     <% List<Course> courses = (List<Course>) request.getAttribute("viewCourse");
+       Users user=(Users)session.getAttribute("userId");
        for (Course course : courses) { %>
            <div class="card">
                <div class="card-body">
@@ -137,11 +143,26 @@ h1 {
                        <input type="hidden" name="courseid" value="<%= course.getCourseId() %>">
                        <input type="hidden" name="coursename" value="<%= course.getCourseName() %>">
                        <input type="hidden" name="courseamount" value="<%= course.getAmount() %>">
-                       <button class="button-style" type="submit">₹<%= course.getAmount() %></button>
+<%--                       <%
+                      System.err.println("---->" + user.getId() + "---->" + course.getCourseName());
+                      ServletContext servletContext = getServletContext();
+                      ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+
+                      UserDAO userDao = (UserDAO) context.getBean("userDao");
+                      if(userDao.changePayment(course.getCourseName(),user.getId()))
+                      {
+                    	  %>
+                       <button class="button-style" type="submit" >View Course</button>
+                       <%} 
+                        else { %>
+ --%>                       <button class="button-style" type="submit">₹<%= course.getAmount() %></button>
+<%--                        <%} %>
+ --%>                       
                    </form>
                </div>
            </div>
        <% } %>
+       
 </div>
 </body>
 </html>
