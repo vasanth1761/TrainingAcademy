@@ -1,4 +1,4 @@
-# <a href="" target="_blank">online Training Academy</a> 
+# <a href="" target="_blank">Online Training Academy</a> 
 - A Java Web Developement Project
 - Instructor
 - Student
