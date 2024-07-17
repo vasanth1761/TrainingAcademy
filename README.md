@@ -6,7 +6,7 @@
 
 <hr>
 <bold>About:</bold><br>
-  online Training Academy which provides a online courses to the students the  student can enroll the courses and view videos after it provide the online test to the student and it provide certificate to the students
+  Online Training Academy which provides a online courses to the students the  student can enroll the courses and view videos after it provide the online test to the student and it provide certificate to the students
 <hr>
 
 <span style="color:blue">**Modules:-**</span><br>
