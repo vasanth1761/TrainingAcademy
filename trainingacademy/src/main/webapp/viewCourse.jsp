@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-  <%@page import="com.chainsys.trainingacademy.model.Users"%>
-!DOCTYPE html>
+<%@ page import="com.chainsys.trainingacademy.model.Users"%>
+<!DOCTYPE html>
 <html lang="en">
-<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,15 +97,18 @@
     }
 
     .dropdown-content {
+        margin-top:60px;
         display: none;
-        position: absolute;
-        background-color: #fff;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-        right: 0;
-        top: 40px;
-        min-width: 160px;
-        border-radius: 8px;
+       position: relative;
+       top: -30px;
+            position: absolute;
+            background-color: white; 
+            min-width: 160px;
+            z-index: 1;
+            border-radius: 10px;
+            color: black; 
+            box-shadow: #666 10px;
+
     }
 
     .dropdown-content a {
@@ -123,6 +125,27 @@
     .profile-section:hover .dropdown-content {
         display: block;
     }
+    
+    .dropdown-content form {
+        margin: 0;
+    }
+
+    .dropdown-content button {
+        width: 100%;
+        background-color: #ff4b4b;
+        color: #fff;
+        border: none;
+        padding: 12px 16px;
+        text-align: left;
+        font-size: 16px;
+        border-radius: 5px;
+      
+        transition: background-color 2s;
+    }
+
+    .dropdown-content button:hover {
+        background-color: #d43f3f;
+    }
 </style>
 </head>
 <body>
@@ -131,10 +154,10 @@
     <span>Systech</span>
     <div class="profile-section">
         <img src="image/profile.png" alt="User Symbol">
-        <span class="username" id="username"><%= userName.getName()%></span>
+        <span class="username" id="username"><%= userName.getName() %></span>
         <div class="dropdown-content">
-            <a href="#">Profile</a>
             <a href="#">Logout</a>
+        
             
         </div>
     </div>
@@ -155,7 +178,7 @@
         <div class="box">
             <div class="card">
                 <img alt="Business Course" src="image/business1.jpg">
-                <input type="hidden" name="action" value="bussiness">
+                <input type="hidden" name="action" value="business">
                 <button type="submit">Enroll</button>
             </div>
         </div>
@@ -184,4 +207,3 @@
 
 </body>
 </html>
- 

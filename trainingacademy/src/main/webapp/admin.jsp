@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome Vasanth</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -115,13 +117,13 @@
     <h2>Systech</h2>
     <ul>
  
-        <li><a href="home.html">Home</a></li>
-        <li><a href="addQuestions.jsp">Add Question</a></li>
-        <li><a href="addVideo.jsp">Add Video</a></li>
-        <li><a href="viewVideos">View videos</a></li>
-        <li><a href="viewQuestions">View questions</a></li>
-        <li><a href="addCourse.jsp">AddCourse</a></li>
-        <li><a href="">Logout</a></li>
+        <li><a href="home.html"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="addQuestions.jsp"><i class="fa-solid fa-plus"style=color:white;></i>Add Question</a></li>
+        <li><a href="addVideo.jsp"><i class="fa-solid fa-plus"style=color:white;></i>Add Video</a></li>
+        <li><a href="viewVideos"><i class="fa-solid fa-eye"style=color:white;></i>View videos</a></li>
+        <li><a href="viewQuestions"><i class="fa-solid fa-eye"style=color:white;></i>View questions</a></li>
+        <li><a href="addCourse.jsp"><i class="fa-solid fa-plus"style=color:white;></i>AddCourse</a></li>
+        <li><a href="welcome.jsp"><i class="fa-solid fa-right-to-bracket"style=color:white;></i>Logout</a></li>
         
     </ul>
 </div>
@@ -135,6 +137,8 @@
   
     <div class="card" onclick="location.href='viewResult';">
         <div class="card-title">
+        <br>
+        <i class="fa-solid fa-users fa-2xl"></i><br><br>
             Learners Result
         </div>
     
@@ -142,12 +146,20 @@
         
     </div>
     <div class="card" onclick="location.href='viewComments';">
+    <br>
         <div class="card-title">
-            Reviews
+        <i class="fa-solid fa-comment fa-2xl"></i><br><br>
+            Comments
         </div>
         
         
     </div>
+    <div class="card" onclick="location.href='viewResult';">
+    <br>
+        <div class="card-title">
+        <i class="fa-solid fa-credit-card fa-2xl"></i><br><br>
+            Payments
+        </div>
 </div>
 
 </body>

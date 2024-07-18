@@ -118,6 +118,32 @@ h1 {
 .button-style:hover {
     background-color: #4CAF50;
 }
+    .dropdown-content {
+        margin-top:60px;
+        display: none;
+       position: relative;
+       top: -30px;
+            position: absolute;
+            background-color: white; 
+            min-width: 160px;
+            z-index: 1;
+            border-radius: 10px;
+            color: black; 
+            box-shadow: #666 10px;
+
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+
 </style>
 </head>
 <body>
@@ -127,6 +153,11 @@ h1 {
     <div class="profile-section">
         <img src="image/profile.png" alt="Profile Picture">
         <span class="username" id="username"><%= userName.getName()%></span>
+        <div class="dropdown-content">
+            <a href="#">Logout</a>
+        
+            
+        </div>
        
     </div>
 </div>

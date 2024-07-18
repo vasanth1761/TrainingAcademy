@@ -44,4 +44,7 @@ public void insertUserResult(Result result)throws ClassNotFoundException,SQLExce
 public boolean checkExistingCourse(String courseName,int userId)throws ClassNotFoundException,SQLException;
 public boolean changePayment(String name,int id)throws ClassNotFoundException,SQLException;
 public void insertComment(Comments comment)throws ClassNotFoundException,SQLException;
+public List<Questions> searchQuestions(String name)throws ClassNotFoundException,SQLException;
+public List<Videos> getSearchVideos(String name) throws ClassNotFoundException,SQLException;
+public List<LearnerPaymentStatus>viewPayment();
 }

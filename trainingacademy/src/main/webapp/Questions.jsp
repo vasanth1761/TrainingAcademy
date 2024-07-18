@@ -60,7 +60,7 @@
     <h1 style="text-align: center;">Question List</h1>
     
     <div class="search-form">
-        <form action="ViewQuestions" method="post">
+        <form action="/searchQuestions" method="post">
             <input type="hidden" name="action" value="search">
             <input type="text" name="searchname" placeholder="Enter the course name">
             <button type="submit">Search</button>

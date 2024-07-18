@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.chainsys.trainingacademy.dao.UserDAO;
 import com.chainsys.trainingacademy.model.Comments;
 import com.chainsys.trainingacademy.model.Course;
+import com.chainsys.trainingacademy.model.LearnerPaymentStatus;
 import com.chainsys.trainingacademy.model.Questions;
 import com.chainsys.trainingacademy.model.Result;
 import com.chainsys.trainingacademy.model.Videos;
@@ -287,4 +288,45 @@ public class InstructorController {
 		return "course.jsp";
 		
 	}
+	@PostMapping("/searchQuestions") 
+	public String Student(@RequestParam("searchname")String name,Model model) 
+	{ 
+
+	List<Questions> searchQuestions;
+	try {
+		searchQuestions = userdao.searchQuestions(name);
+		model.addAttribute("viewAllQuestions", searchQuestions);
+	} catch (ClassNotFoundException e) {
+		e.printStackTrace();
+	} catch (SQLException e) {
+
+		e.printStackTrace();
+	}
+
+	return "Questions.jsp"; 
+	} 
+	@PostMapping("/searchVideos")
+	public String searchVideos(@RequestParam("searchname")String name,Model model) 
+	{   
+		try {
+			List<Videos>searchVideos =userdao.getSearchVideos(name);
+			model.addAttribute("viewAllVideos", searchVideos);
+		} catch (ClassNotFoundException e) {
+			
+			e.printStackTrace();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return "videos.jsp";
+		
+	}
+	
+  @RequestMapping("/viewPayment")
+  public void payment(Model model)
+  {   
+	  LearnerPaymentStatus viewPayment=new LearnerPaymentStatus();
+	  userdao.viewPayment();
+  }
+
 }

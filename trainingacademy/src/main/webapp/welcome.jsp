@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navigation Bar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -176,7 +177,7 @@
        
         <ul>
 
-            <li><a href="#">About us</a></li>
+            <li><a href="#"><i class="fas fa-info-circle"></i>About us</a></li>
             <li><a href="login.jsp">Login</a></li>
             <li><a href="register.jsp">Sign Up</a></li>
         </ul>
@@ -201,7 +202,7 @@
     <div class="content">
         <p>Professional Certificates offer flexible, online training designed <br><br>
              to get you job-ready for high-growth fields.</p>
-             <form action="landingpage.jsp">
+             <form action="login.jsp">
              <button>Enroll</button>
             </form>
     </div>

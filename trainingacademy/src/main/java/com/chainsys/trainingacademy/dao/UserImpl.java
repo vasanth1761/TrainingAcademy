@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Repository;
 
 import com.chainsys.trainingacademy.model.Comments;
@@ -249,6 +250,30 @@ public void insertComment(Comments comment) throws ClassNotFoundException, SQLEx
 	jdbcTemplate.update(query,course);
 	
 }
+@Override
+public List<Questions> searchQuestions(String name) throws ClassNotFoundException, SQLException 
+{
+	
+		 String query="select * from question where category=?";
+		 Object[]value= {name}; 
+	     return jdbcTemplate.query(query,new ViewQuestionMapper(),value);
+	
 }
+@Override
+public List<Videos> getSearchVideos(String name) throws ClassNotFoundException, SQLException {
+	String query="select * from videos WHERE Category=?";
+	Object[]value= {name};
+	return jdbcTemplate.query(query,new ViewVideoMapper(),value);
+	
+}
+@Override
+public List<LearnerPaymentStatus> viewPayment() {
+	String query ="select from learner_id,learner_name,course_name,amount,payment,enroll_date from learner_payment";
+	return jdbcTemplate.query(query,new ViewPaymentMapper());
+}
+
+
+}
+
 	
 

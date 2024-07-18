@@ -72,7 +72,7 @@
 <body>
     <h1>Videos</h1>
     <div class="search-form">
-        <form action="ViewVideos" method="post">
+        <form action="/searchVideos" method="post">
             <input type="hidden" name="action" value="search">
             <input type="text" name="searchname" placeholder="Enter the course name">
             <button type="submit">Search</button>

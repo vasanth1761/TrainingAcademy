@@ -75,6 +75,7 @@ public  String user(@RequestParam("name") String name,@RequestParam("email") Str
    }
    else
    {
+   model.addAttribute("errorMessage", "Account already exists So please Login");
    return "login.jsp";
 
    }
@@ -119,6 +120,7 @@ public String userLogin(@RequestParam("email") String email,@RequestParam("passw
     }
     else
     {
+    model.addAttribute("errorMessage", "you dont have an account please Register");	
 	return "register.jsp";
  
 }
@@ -126,8 +128,9 @@ public String userLogin(@RequestParam("email") String email,@RequestParam("passw
 
 
 @PostMapping("/selectCourse")
-public String course(@RequestParam("action")String course,Model model)
-{
+public String course(@RequestParam("action")String course,Model model,HttpSession session)
+{    
+	 Users user = (Users) session.getAttribute("userId");
 	System.out.println(course);
 	try {
 		List<Course>viewCourse=userdao.getCourseType(course);
@@ -368,6 +371,8 @@ public String comments(@RequestParam("comment") String comment,HttpSession sessi
 	return "thankYou.jsp";
 	
 }
+
+
 }
 
 
